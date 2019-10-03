@@ -1,0 +1,20 @@
+<%@page content_type="text/html; charset=ISO-8859-1"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><HEAD>
+<title>firecat webserver</title>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link rel="icon" href="favicon.ico" type="image/x-icon"> 
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
+<link rel="stylesheet" type="text/css" href="default.css" />
+</HEAD>
+<BODY>
+<table>
+<tr><td><b><a class="noline" href="http://firecat.nihonsoft.org/"><img src="images/icon_32.png" border="0" alt="firecat.nihonsoft.org"> <font size="6" color="#ff9900">firecat</font></a></b><br />
+<a class="noline" href="http://research.nihonsoft.org"><font size="2" color="#999900">Webpages Made Simple</font></a></td></tr>
+</table>
+<font color="#5D7992">
+<nsp:PageTemplateBodyContent />
+</font>
+<P><table>
+<tr><td align="left"><a class="powered" href="http://firecat.nihonsoft.org/"><img src="images/powered_by.png" border="0" alt="Powered by firecat" /></a></td></tr>
+</table></P></BODY>
+</html>

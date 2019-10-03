@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<Motor fg_allow_linking="true">
+    <!-- START Required EndPoint Filters-->
+    <EndPointFilter idt_name="weblet_end_point_filter" class_name="jp.nihonsoft.firecat.weblet.WebletEndPointFilter" sib_priority="1" />
+    <EndPointFilter idt_name="nsp_end_point_filter" class_name="jp.nihonsoft.firecat.nsp.rhino.RhinoNspEndPointFilter" sib_priority="2">
+        <InitStrAttr idt_name="src_compiler" value="javac" />
+    </EndPointFilter>
+    <EndPointFilter idt_name="static_resource_end_point_filter" class_name="jp.nihonsoft.firecat.http.w3c.W3cStaticResourceEndPointFilter" sib_priority="3">
+        <InitStrAttr idt_name="default_dir_files" value="index.nsp, index.html, index.htm" />
+    </EndPointFilter>
+    <!-- END Required EndPoint Filters-->
+    
+    <!-- START Required TagManagers-->
+    <TagManager idt_prefix="nsp" class_name="jp.nihonsoft.firecat.nsp.ntag.implicit.NspPrefixTagManager" />
+    <!-- END Required TagManagers-->
+    
+    <!-- START Required Loggers-->
+    <MotorLogger idt_class_name="jp.nihonsoft.firecat.logger.AppLogger" filename="persistant_event_log" filename_prefix="" filename_suffix=".log" file_directory="logs/" add_timestamp="true" />
+    <!-- END Required Loggers-->
+
+    <!-- START Required Connectors-->
+    <NjpConnector idt_class_name="jp.nihonsoft.firecat.njp.server.Njp13Server" port="9009" worker_count="5" worker_timeout_ms="150000" />
+    <WebConnector idt_class_name="jp.nihonsoft.firecat.http.w3c.W3cHttpServer" port="8080" worker_count="10" worker_timeout_ms="150000" />
+    <!--<SslConnector idt_class_name="jp.nihonsoft.firecat.http.w3c.W3cHttpsServer" port="8443" worker_count="10" worker_timeout_ms="150000" key_store_file_path="/path/to/your/.keystore" key_store_pass="k_store_password"  protocol="TLS" />-->
+    <!-- END Required Connectors-->
+    
+    <!-- START ContentType maps-->
+    <ContentTypeMap idt_name="html_map" ext_types="*.htm, *.html" content_type="text/html; charset=ISO_8859_1" />
+    <ContentTypeMap idt_name="text_map" ext_types="*.txt" content_type="text/plain; charset=ISO_8859_1" />
+    <!-- END ContentType maps-->
+    
+    <!-- START HostContext Config-->
+    <Host idt_hostname="DEFAULT_HOST" base_path="DEFAULT" fg_allow_linking="true" fg_allow_motor_context_access="true">
+        <Weppli idt_web_context_path="/" base_path="WWWROOT" fg_allow_linking="true" fg_allow_host_context_access="true"/>
+        <AccessLogger filename="access_log" filename_prefix="" filename_suffix=".log" add_timestamp="true" do_flush="true" />
+    </Host>
+    
+    <!--
+    <Host idt_hostname="firecat.jp" base_path="firecat_jp" fg_allow_linking="true">
+        <HostAlias idt_alias_hostname="www.firecat.jp" />
+        <AccessLogger filename="access_log" filename_prefix="" filename_suffix=".log" file_directory="/logs/firecat_jp/" add_timestamp="true" do_flush="true" />
+        <Weppli idt_web_context_path="/" base_path="WWWROOT" fg_allow_linking="false" />
+    </Host>
+    -->
+    
+    <!-- END HostContext Config-->
+</Motor>

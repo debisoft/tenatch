@@ -1,0 +1,15 @@
+Prerequisites:
+1. JDK 1.4 Runtime.
+2. A Java Compiler needs to be accessible from the command line.
+We recommend the use of jikes(Debian: apt-get install jikes),
+which is configured as the default compiler.
+
+Installation Instructions:
+1. Unpack package and move unpacked directory to a suitable location.
+(suggested app_home: /usr/firecat/firecat_home).
+2. Edit app_home and jdk_home in bin/firecatd.
+3. Copy bin/firecatd to init.d directory(Debian: /etc/init.d).
+4. Configure firecatd to start on bootup(Debian: update-rc.d).
+5. Start up firecat(firecatd start).
+
+Send any questions to fchoong@users.sourceforge.net
