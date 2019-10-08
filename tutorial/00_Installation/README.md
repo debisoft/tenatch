@@ -1,7 +1,7 @@
 # Installation
 
 ## macOS
-[ここ](http://firecat256.appspot.com/kiwicat/firecat_1_0_x/rc_1/downloads.nsp)でインストール
+[ここ](http://firecat256.appspot.com/kiwicat/aussiecat_1_1_x/svs_2/downloads.nsp)でインストール
 
 `bin/firecatd`ファイルの一部を以下のように編集
 ```
