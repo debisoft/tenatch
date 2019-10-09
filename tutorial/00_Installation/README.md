@@ -6,7 +6,7 @@
 `bin/firecatd`ファイルの一部を以下のように編集
 ```
 app_home="プロジェクトディレクトリ"
-jdk_home="JDKのHOMEディレクトリ"
+jdk_home="JDKのHOMEディレクトリ（Macの場合は/Library/Java/JavaVirtualMachines/jdk＜JDKのバージョン＞/Contents/Home/"
 ```
 
 `./firecatd run`コマンドを実行します。
