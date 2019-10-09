@@ -18,6 +18,7 @@ Implicit Objects はもとから作られたObjectとして機能します。
 *ANspBodyBuffer is temporary and will be replaced by the IResponseWriter
 interface in the next release.
 <br>
+<br>
 
 ## Examples
 `Request_tutorial_1.nsp`というファイルを作成して、以下のコードを貼り付けます。
@@ -34,5 +35,5 @@ interface in the next release.
 <%=msg%>
 ```
 
-`/WEBHOST/DEFAULT/WWWROOT`を作成しているならば, [http://localhost:8080/Request_tutorial_1.nsp](http://localhost:8080/Request_tutorial_1.nsp) からブラウザでチェックできます。
+`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているならば, [http://localhost/Request_tutorial_1.nsp](http://localhost/Request_tutorial_1.nsp) からブラウザでチェックできます。
 <br>
