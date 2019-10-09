@@ -1,6 +1,7 @@
 ## Page Template
 
-### 1. `template_1.nsp`というファイルを作成して、以下のコードを貼り付けます。
+<br><br>
+1. `template_1.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成して、以下のコードを貼り付けます。
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
@@ -21,9 +22,9 @@
     </body>
 </html>
 ```
-<br>
+<br><br>
 
-### 2. 次に`hotday.nsp`というファイルを作成し、以下のコードを貼り付けます。
+2. 次に`hotday.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成し、以下のコードを貼り付けます。
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
@@ -37,11 +38,10 @@
 
 </nsp:PageTemplate>
 ```
-<br>
+<br><br>
 
-### 3. ブラウザでテストしましょう。
-`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、
-[http://localhost/hotday.nsp](http://localhost/hotday.nsp)にアクセスします。
+3. ブラウザでテストしましょう。
+`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、[http://localhost:8080/hotday.nsp](http://localhost:8080/hotday.nsp) にアクセスします。
 
 
 
