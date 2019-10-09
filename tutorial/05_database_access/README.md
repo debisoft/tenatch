@@ -7,7 +7,7 @@ Windowsの場合は[こちら](https://dev.mysql.com/doc/refman/8.0/en/windows-i
 
 ## Install Connector
 
-JDBCドライバーのコネクターを[こちら](https://dev.mysql.com/downloads/connector/j/)からインストールしましょう。<br>
+MySQLのコネクターを[こちら](https://dev.mysql.com/downloads/connector/j/)からインストールしましょう。<br>
 Select Operating System:　でPlatform Independent を選択しましょう。<br>
 
 1. Place the JDBC driver jar of the database you plan to use into $FIRECAT_HOME/lib/
