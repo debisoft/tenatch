@@ -1,5 +1,15 @@
 # Database Access
 
+## Install MySQL
+
+Macの場合は[ここ](https://dev.mysql.com/doc/refman/8.0/en/osx-installation-pkg.html)を参考にMySQLをインストールしましょう。<br>
+Windowsの場合は[こちら](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)を参考にインストールしましょう。<br>
+
+## Install Connector
+
+JDBCドライバーのコネクターを[こちら](https://dev.mysql.com/downloads/connector/j/)からインストールしましょう。<br>
+Select Operating System:　でPlatform Independent を選択しましょう。<br>
+
 1. Place the JDBC driver jar of the database you plan to use into $FIRECAT_HOME/lib/
 2. Create a database called test_db.
 3. Create a table called test_tbl and populate with data.
