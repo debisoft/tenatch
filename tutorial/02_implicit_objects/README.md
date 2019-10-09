@@ -21,7 +21,7 @@ interface in the next release.
 <br>
 
 ## Examples
-`Request_tutorial_1.nsp`というファイルを作成して、以下のコードを貼り付けます。
+`Request_tutorial_1.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成して、以下のコードを貼り付けます。
 
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
@@ -35,5 +35,5 @@ interface in the next release.
 <%=msg%>
 ```
 
-`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているならば, [http://localhost/Request_tutorial_1.nsp](http://localhost/Request_tutorial_1.nsp) からブラウザでチェックできます。
+`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているならば, [http://localhost:8080/Request_tutorial_1.nsp](http://localhost:8080/Request_tutorial_1.nsp) からブラウザでチェックできます。
 <br>
