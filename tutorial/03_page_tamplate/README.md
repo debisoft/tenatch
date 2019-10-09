@@ -1,7 +1,8 @@
 ## Page Template
-
 <br>
+
 1. `template_1.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成して、以下のコードを貼り付けます。
+
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
