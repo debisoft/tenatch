@@ -13,11 +13,11 @@
 
 # Step 1: Specify your app_home here
 # eg. app_home="/usr/firecat/firecat_home/"
-app_home=""
+app_home="/Users/kent/tenatch/tenatch/examples/initialProject/"
 
 # Step 2: change this to point to your JDK directory.
 # eg. jdk_home="/usr/java/j2sdk1.4.0/"
-jdk_home=""
+jdk_home="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/"
 #jdk_home="/usr/local/lib/sablevm/"
 
 # Step 3(Optional): Set the MAX startup time and shutdown time.
