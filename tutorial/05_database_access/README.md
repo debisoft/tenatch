@@ -1,14 +1,14 @@
 # Database Access
 
-## Install MySQL
+## Install PostgreSQL
 
-Macの場合は[ここ](https://dev.mysql.com/doc/refman/8.0/en/osx-installation-pkg.html)を参考にMySQLをインストールしましょう。<br>
-Windowsの場合は[こちら](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)を参考にインストールしましょう。<br>
+Macの場合は[ここ](https://postgresapp.com/)を参考にPostgreSQLをインストールしましょう。<br>
+Windowsの場合は[こちら](https://www.postgresql.org/download/)を参考にインストールしましょう。<br>
 
 ## Install Database Connector
 
-MySQLのコネクターを[こちら](https://dev.mysql.com/downloads/connector/j/)からインストールしましょう。<br>
-Select Operating System:　でPlatform Independent を選択しましょう。<br>
+PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.html)からインストールしましょう。<br>
+バージョンは新しければ多分大丈夫です。
 
 1. Place the JDBC driver jar of the database you plan to use into $FIRECAT_HOME/lib/
 2. Create a database called test_db.
