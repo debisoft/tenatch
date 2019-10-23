@@ -20,13 +20,13 @@ app_home="プロジェクトディレクトリ"
 jdk_home="JDKのHOMEディレクトリ（Macの場合は/Library/Java/JavaVirtualMachines/jdk＜JDKのバージョン（バージョンは最新のであれば問題ありません、例：jdk-13.0.0）＞/Contents/Home/"
 ```
 
-例えば、JavaをMacでOracleのサイトからダウンロードし、Firecatのサイトからダウンロードしたファイルが`Users/username/Downloads/aussiecat(ダウンロードしたディレクトリ)`にあった場合、
+例えば、JavaをMacでOracleのサイトからダウンロードし、Firecatのサイトからダウンロードしたディレクトリが`Users/username/Downloads/aussiecat(ダウンロードしたディレクトリ)`にあった場合、
 ```
 app_home="Users/username/Downloads/aussiecat"
 jdk_home="/Library/Java/JavaVirtualMachines/jdk-13.10.1/Contents/Home/"
 ```
 おそらくこのようになります。（JDKのバージョンはちゃんと確認してください）<br>
-次に`./catd run`コマンドを実行します。
+次に`./aussiecatd run`コマンドを実行します。
 
 その後、http://localhost:8080
 にアクセスます。
