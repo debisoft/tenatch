@@ -26,7 +26,7 @@ app_home="Users/username/Downloads/aussiecat"
 jdk_home="/Library/Java/JavaVirtualMachines/jdk-13.10.1/Contents/Home/"
 ```
 おそらくこのようになります。（JDKのバージョンはちゃんと確認してください）<br>
-次に`./firecatd run`コマンドを実行します。
+次に`./catd run`コマンドを実行します。
 
 その後、http://localhost:8080
 にアクセスます。
