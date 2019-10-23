@@ -26,7 +26,9 @@ app_home="Users/username/Downloads/aussiecat"
 jdk_home="/Library/Java/JavaVirtualMachines/jdk-13.10.1/Contents/Home/"
 ```
 おそらくこのようになります。（JDKのバージョンはちゃんと確認してください）<br>
-次に`./aussiecatd run`コマンドを実行します。
+次にターミナル（Windowsの場合はコマンドプロンプト）で、<br>
+`cd ＜ダウンロードしたディレクトリ(e.g. ~/Downloads/aussiecat)＞`<br>
+その後、`./bin/aussiecatd run`コマンドを実行します。
 
-その後、http://localhost:8080
-にアクセスます。
+[http://localhost:8080](http://localhost:8080) にアクセスするとサイトがみれます。
+
