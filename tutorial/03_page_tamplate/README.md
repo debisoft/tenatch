@@ -42,7 +42,7 @@
 <br>
 
 3. ブラウザでテストしましょう。
-`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、[http://localhost:8080/hotday.nsp](http://localhost:8080/hotday.nsp) にアクセスします。
+`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、[http://localhost:8080/hotday.nsp](http://localhost:9090/hotday.nsp) にアクセスします。
 
 
 
