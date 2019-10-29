@@ -13,7 +13,7 @@
 <br>
 
 2.　ブラウザで確認しましょう。<br>
-次のURLにアクセスします。http://localhost:8080/Hello.nsp
+次のURLにアクセスします。http://localhost:9090/Hello.nsp
 <br><br>
 
 ### Syntax
