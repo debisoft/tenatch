@@ -30,5 +30,5 @@ jdk_home="/Library/Java/JavaVirtualMachines/jdk-13.10.1/Contents/Home/"
 `cd ＜ダウンロードしたディレクトリ(e.g. ~/Downloads/aussiecat)＞`<br>
 その後、`./bin/aussiecatd run`コマンドを実行します。
 
-[http://localhost:8080](http://localhost:8080) にアクセスするとサイトがみれます。
+[http://localhost:9090](http://localhost:9090) にアクセスするとサイトがみれます。
 
