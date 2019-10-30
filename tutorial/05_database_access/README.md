@@ -38,7 +38,7 @@ PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.
 
 5. Test the page in your browser:
 If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
-you should be able to view the page at http://localhost/db_test.nsp
+you should be able to view the page at http://localhost:9090/db_test.nsp
 NOTE: Webpage names are case sensitive.
 So db_test.nsp.nsp is not the same file as DB_test.nsp
 
