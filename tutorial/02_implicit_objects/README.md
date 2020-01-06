@@ -35,5 +35,5 @@ interface in the next release.
 <%=msg%>
 ```
 
-`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているならば, [http://localhost:9090/Request_tutorial_1.nsp](http://localhost:9090/Request_tutorial_1.nsp) からブラウザでチェックできます。
+`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているならば, [http://localhost:8080/Request_tutorial_1.nsp](http://localhost:9090/Request_tutorial_1.nsp) からブラウザでチェックできます。
 <br>
