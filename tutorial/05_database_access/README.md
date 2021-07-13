@@ -14,11 +14,17 @@ PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.
 2. Create a database called test_db.
 3. Create a table called test_tbl and populate with data.
 4. Create a file called db_test.nsp and put in the following lines:
+
+```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
 <%
-    var db = new Database("org.postgresql.Driver"); // change to the JDBC Driver you are using.
-    db.connect("jdbc:postgresql://127.0.0.1:5432/test_db", "postgres", "your_password"); // change the database username and password.
+    var db = new Database("org.postgresql.Driver");
+    // ^change to the JDBC Driver you are using.
+
+    db.connect("jdbc:postgresql://127.0.0.1:5432/test_db", "postgres", "your_password");
+    // ^change the database username and password.
+
     var result = db.executeRetrieval("SELECT * FROM test_tbl");
 
     while(result.next())
@@ -34,7 +40,7 @@ PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.
 
     db.disconnect();
 %>
-
+```
 
 5. Test the page in your browser:
 If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
