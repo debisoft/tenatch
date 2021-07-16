@@ -8,8 +8,8 @@
 <%
     var sessionContext = request.getSessionContext();
 
-    var curr_count = sessionContext.getAttr("counter_1");
-
+    var curr_count = Number(sessionContext.getAttr("counter_1"));
+    
     if(curr_count != null)
     {
         curr_count = curr_count + 1;
