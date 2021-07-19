@@ -25,6 +25,4 @@
 %>
 ```
 
-<br>
-2. [http://localhost:9090/session_access.nsp](http://localhost:9090/session_access.nsp)にアクセスして見てみましょう。<br>
-ブラウザをリロードするたびにアクセスカウントが増えます。
+2. [http://localhost:9090/session_access.nsp](http://localhost:9090/session_access.nsp)にアクセスして見てみましょう。ブラウザをリロードするたびにアクセスカウントが増えます。
