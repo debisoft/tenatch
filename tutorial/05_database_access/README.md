@@ -45,8 +45,8 @@ PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.
 5. Test the page in your browser:
 If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
 you should be able to view the page at http://localhost:9090/db_select_test.nsp
-NOTE: Webpage names are case sensitive.
-So db_test.nsp.nsp is not the same file as DB_test.nsp
+<br>NOTE: Webpage names are case sensitive.
+So db_select_test.nsp.nsp is not the same file as DB_Select_test.nsp
 
 6. You should be able to see the contents of the table you created.
 7. More documentation on the use of the Database Object can be found at FESI Database Extension.
