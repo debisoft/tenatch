@@ -72,17 +72,17 @@
 
 <br>
 
-6. ブラウザで http://localhost:9090/db_select_test.tsp を開くと Insert したオブジェクトが確認できます。
+6. ブラウザで http://localhost:9090/db_select_test.tsp を開くと、Insert したオブジェクトが確認できます。
    <br>
 
 7. データベース内の情報を確認してみましょう。
    デスクトップに戻ると、ダウンロードした MongoDBcompass が通常インストールされているので、それを開きます。
    <br>
 
-8. New 　 Connection 　のパス/URL に　 mongodb://127.0.0.1:27017 　を入力して Connect します。
+8. New Connection のパス/URL に　 `mongodb://127.0.0.1:27017` 　を入力して Connect します。
    <br>
 
-9. sample_training をひらくと、ステップ 5 で作成した persons コレクションがあるのでクリックすると Insert したオブジェクトが確認できます。
+9. `sample_training`をひらくと、ステップ 5 で作成した`persons`コレクションがあるのでクリックすると Insert したオブジェクトが確認できます。
    <br>
 
-10. 05_01_database_insert、 05_01_database_find、05_01_database_update 　を参考に、データベース内のデータをどう変更するか、練習してみましょう。
+10. `05_01_database_insert`、 `05_01_database_find`、`05_01_database_update` 　を参考に、データベース内のデータをどう変更するか、練習してみましょう。
