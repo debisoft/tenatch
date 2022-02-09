@@ -1,46 +1,18 @@
 # Database Insert
 
-## See Intro
-
-初期は[ここ](../README.md)を参考にPostgreSQLをインストールしましょう。
-
-## Database INSERT
-
-1. Create a file called db_insert_test.nsp and put in the following lines: <br>
-
-```
-<%@page content_type="text/html; charset=ISO-8859-1"%>
 <%
-  var db = new Database("org.postgresql.Driver");
-  //^ change to the JDBC Driver you are using.
+// Database connection
+let mongoClient = mdb.getMongoClient('tester');
+let db = mongoClient.getDB("sample_training");
+let jdb = mdb.makeJongo(db);
 
-  db.connect("jdbc:postgresql://127.0.0.1:5432/test_db", "postgres", "your_password");
-  //^ change the database username and password.
+let personCollection = jdb.getCollection("persons");
 
-  var update_count = db.executeCommand("INSERT INTO test_tbl(username, email) VALUES('shinigamidee','a@b.com')");
-  //^ change accordingly to your table schema
+// Create data
+let json_str = '{"name": "Bob", "id": 1, "city": "Kobe"}';
+let json_obj = JSON.parse(json_str);
+let mdoc = mdb.parseJSON(json_obj);
 
-  var err = db.getLastError();
-
-  if(err)
-  {
-    resOut.println('err: ' + err);
-  }
-  else
-  {
-    resOut.println('Rows affected: ' + update_count);
-  }
-
-  db.disconnect();
+// Insert the data
+personCollection.insert(mdoc);
 %>
-```
-
-2. Test the page in your browser:
-If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
-you should be able to view the page at http://localhost:9090/db_insert_test.nsp
-<br>NOTE: Webpage names are case sensitive.
-
-3. You should be able to see the number of rows affected, or an error message if there was a problem.
-4. More documentation on the use of the Database Object can be found at FESI Database Extension.
-NOTE: Another method of connecting to the database is under development and
-will eventually replace this method.
