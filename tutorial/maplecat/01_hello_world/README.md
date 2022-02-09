@@ -1,6 +1,6 @@
 # Hello World
 
-1. Hello.tsp ファイルを`プロジェクトファイル/WEBHOST/DEFAULT/WWWROOT`のディレクトリ内に作成し、以下のコードを貼り付けます。<br>
+1. `Hello.tsp` というファイルを`プロジェクトファイル/WEBHOST/DEFAULT/WWWROOT`のディレクトリ内に作成し、以下のコードを貼り付けます。<br>
 
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
@@ -14,9 +14,9 @@
 
 <br>
 
-2.　ブラウザで確認しましょう。<br>
-次の URL にアクセスします。http://localhost:9090/Hello.tsp
-<br><br>
+2. ブラウザで確認しましょう。<br>
+   次の URL にアクセスします。[http://localhost:9090/Hello.tsp](http://localhost:9090/Hello.tsp)
+   <br><br>
 
 ### Syntax
 

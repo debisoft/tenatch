@@ -72,7 +72,7 @@
 
 <br>
 
-6. ブラウザで http://localhost:9090/db_select_test.tsp を開くと、Insert したオブジェクトが確認できます。
+6. ブラウザで [http://localhost:9090/db_select_test.tsp](http://localhost:9090/db_select_test.tsp) を開くと、Insert したオブジェクトが確認できます。
    <br>
 
 7. データベース内の情報を確認してみましょう。
