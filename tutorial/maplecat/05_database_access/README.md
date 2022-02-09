@@ -28,7 +28,7 @@
 
 <br>
 
-4. Maplecat にもどり、db_select_test.tsp 　を作成します。
+4. Maplecat にもどり、`/WEBHOST/DEFAULT/WWWROOT` 内に `db_select_test.tsp` 　を作成します。
    <br>
 
 5. 以下のコードを貼り付けます。
