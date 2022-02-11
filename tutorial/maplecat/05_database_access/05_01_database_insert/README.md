@@ -3,18 +3,13 @@
 ```
 <%
 // Database connection
-  let mongoClient = mdb.getMongoClient('tester');
-  let db = mongoClient.getDB("sample_training");
-  let jdb = mdb.makeJongo(db);
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
 
-  let personCollection = jdb.getCollection("persons");
-
-// Create data
-  let json_str = '{"name": "Bob", "id": 1, "city": "Kobe"}';
-  let json_obj = JSON.parse(json_str);
-  let mdoc = mdb.parseJSON(json_obj);
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
 
 // Insert the data
-  personCollection.insert(mdoc);
+  mondb.insertStr(personCollection, '{"name": "shinigamidee", "id": 1, "city": "Kobe"}');
 %>
 ```

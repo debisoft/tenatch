@@ -1,22 +1,42 @@
 # Database Find
 
+## Find example:
+
 ```
 <%
 // Database connection
-    let mongoClient = mdb.getMongoClient('tester');
-    let db = mongoClient.getDB("sample_training");
-    let jdb = mdb.makeJongo(db);
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
 
-    let personCollection = jdb.getCollection("persons");
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
 
 // Find the data
-    let personList = personCollection.find("{name: 'Bob'}").map(
-    r => return JSON.parse(r)
-    );
+    let personList = mondb.find(personCollection, "{name: 'shinigamidee'}");
 
 // Display the data
     personList.forEach(
-    person => resOut.println(person.name + ", " + person.city + "<br />");
-    );
+		person => resOut.println(person.name + ", " + person.city + "<br />");
+	);
+%>
+```
+
+## Find One example:
+
+```
+<%
+// Database connection
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
+
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
+
+// Find the data
+    let person = mondb.findOne(personCollection, "{name: 'shinigamidee'}");
+
+
+// Display the data
+    resOut.println(person.name + ", " + person.city + "<br />");
 %>
 ```

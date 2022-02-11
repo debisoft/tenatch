@@ -39,28 +39,21 @@
 <%
 /*********************************************************/
 // Database connection
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
 
-	let mongoClient = mdb.getMongoClient('tester');　
-	let db = mongoClient.getDB("sample_training");
-	let jdb = mdb.makeJongo(db);
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
 
 /*********************************************************/
 // Insert example: make a collection and insert pbject(s)
 
-	let personCollection = jdb.getCollection("persons");　
-
-	let json_str = '{"name": "Bob", "id": 1, "city": "Toronto"}';
-	let json_obj = JSON.parse(json_str);
-	let mdoc = mdb.parseJSON(json_obj);
-
-	personCollection.insert(mdoc);
+	mondb.insertStr(personCollection, '{"name": "shinigamidee", "id": 1, "city": "Kobe"}');
 
 /*********************************************************/
 // Find example: print out the object(s) in the collection
 
-    let personList = personCollection.find("{name: 'Bob'}").map(
-		r => return JSON.parse(r)
-	);
+    let personList = mondb.find(personCollection, "{name: 'shinigamidee'}");
 
 	personList.forEach(
 		person => resOut.println(person.name + ", " + person.city + "<br />");

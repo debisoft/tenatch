@@ -1,15 +1,39 @@
 # Database Update
 
+## Update example:
+
 ```
 <%
 // Database connection
-    let mongoClient = mdb.getMongoClient('tester');
-    let db = mongoClient.getDB("sample_training");
-    let jdb = mdb.makeJongo(db);
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
 
-    let personCollection = jdb.getCollection("persons");
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
 
 // Update the data
-    personCollection.update("{name: 'Bob'}").with("{$set: {city: 'Fukuoka'}}");
-    %>
+    personCollection.update("{name: 'shinigamidee'}").with("{$set: {city: 'Fukuoka'}}");
+
+%>
+```
+
+## Update retrieved document example:
+
+```
+<%
+// Database connection
+	// connect to the database
+	let mdb = mondb.connectDB('tester', "sample_training");
+
+	// get the collection
+	let personCollection = mdb.getCollection("persons");
+
+// Update the data
+    let person = mondb.findOne(personCollection, "{name: 'shinigamidee'}");
+
+	person.city = 'Yokohama';
+
+	mondb.update(personCollection, person);
+
+ %>
 ```
