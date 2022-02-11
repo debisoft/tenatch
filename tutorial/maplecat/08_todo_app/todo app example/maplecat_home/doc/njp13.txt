@@ -1,0 +1,239 @@
+Packet Header:
+Packet Type:
+	Request Packet      (int) 0x1234    REQUEST_PACKET_HEADER_START                 int: 4660
+	Reqponse Packet     (int) 0x4142    RESPONSE_PACKET_HEADER_START    ASCII: AB, int: 16706
+
+	Packet Sub Type:
+
+	Request Type:
+    		Shutdown server                                         (int) 7     NJP_SHUTDOWN_SERVER
+    		Ping							(int) 9     NJP_PING
+    		Quick Ping						(int) 11    NJP_QUICK_PING
+    		Reload Config						(int) 21    NJP_RELOAD_CONFIG
+    		Start Request						(int) 31    NJP_FORWARD_REQUEST
+    		Send remaining chunk of the request header		(int) 33    NJP_FORWARD_REQUEST_HEADER_CHUNK
+    		Send remaining chunk of the request body		(int) 35    NJP_FORWARD_REQUEST_BODY_CHUNK
+		No chunks left, and no more data expect.		(int) 37    NJP_FORWARD_REQUEST_NO_CHUNK
+		Abort Request(Error occurred)				(int) 51    NJP_FORWARD_REQUEST_ABORT
+
+	Response Type:
+		Reply to a ping						(int) 10    NJP_PONG
+		Reply to a quick ping 					(int) 12    NJP_QUICK_PONG
+		Get remaining request header chunk			(int) 34    NJP_GET_REQUEST_HEADER_CHUNK
+		Get remaining request body chunk			(int) 36    NJP_GET_REQUEST_BODY_CHUNK
+		Start Response						(int) 40    NJP_SEND_RESPONSE
+		Send a response header chunk				(int) 42    NJP_SEND_RESPONSE_HEADER_CHUNK
+		Send a response body chunk				(int) 44    NJP_SEND_RESPONSE_BODY_CHUNK
+		Signals the end processing cycle			(int) 50    NJP_END_PROCESSING_CYCLE
+		Abort Response(Error occurred)				(int) 52    NJP_RESPONSE_ABORT
+
+packet structure:
+
+MAX_PACKET_SIZE = 8192b(byte)
+
+REQUEST PACKET Structure:
+
+	Packet_Header:
+            | 1b_byte 0x12 | 1b_byte 0x34 | 2b_int packet_type |1b_bool last_packet_in_group | 1b_bool reserved bit | 2b_int payload_length(n) | 2b_int reserved int |
+
+
+        A typical request will look like:
+            | 1b_byte 0x12 | 1b_byte 0x34 | 2b_int packet_type |1b_bool last_packet_in_group | 1b_bool reserved bit | 2b_int payload_length(n) | 2b_int reserved int | ...(n -1) + 10 |
+
+Generic Request payload Format:
+	Payload Control Info
+		packet_type			(int)
+	Actual Payload
+		optional_attributes		*(attribute)
+		njp13_break			(byte) 0xFF
+
+Forward Request payload Format:
+
+	Payload Control Info
+		packet_type			(int) 31
+
+	Actual Payload
+		method				(byte)
+		req_uri				(String)	Note: This includes the path info and query string.
+		protocol			(String)
+		remote_addr			(String)
+		remote_host			(String)
+		server_name			(String)
+		server_port			(int)
+		is_ssl				(boolean)
+		optional_attributes		*(attribute)
+		njp13_break			(byte) 0xFF
+		request_headers			*(req_header)
+		njp13_break			(byte) 0xFF
+
+note: If all the info cannot be sent in the first packet, another packet is sent, the entire request is proccessed using the
+concatenation of all the actual payloads:
+whole_forward_request = forward_request_packet_actual_payload concat *(forward_request_header_chunk_packet_actual_payload)
+note: All request which consists of only 1 packet should mark itself as the final packet, by setting the last_packet_in_group to true. Requests which do not do so will be considered as incomplete.
+
+Forward Request Header Chunk payload format:
+
+	Payload Control Info
+		packet_type			(int) 33
+
+	Actual Payload
+		remaining headers
+		njp13_break			(byte) 0xFF
+
+Forward Request Body Chunk payload format:
+
+	Payload Control Info
+		packet_type			(int) 37
+
+	Actual Payload
+		binary_data			(byte[])
+
+
+Methods:
+		OPTIONS				0x01
+		GET				0x02
+		HEAD				0x03
+		POST				0x04
+		PUT				0x05
+		DELETE				0x06
+		TRACE				0x07
+		PROPFIND			0x08
+		PROPPATCH			0x09
+		MKCOL				0x0A
+		COPY				0x0B
+		MOVE				0x0C
+		LOCK				0x0D
+		UNLOCK				0x0E
+		ACL				0x0F
+		REPORT				0x10
+		VERSION-CONTROL                 0x11
+		CHECKIN				0x12
+		CHECKOUT			0x13
+		UNCHECKOUT			0x14
+		SEARCH				0x15
+		MKWORKSPACE                     0x16
+		UPDATE				0x17
+		LABEL				0x18
+		MERGE				0x19
+		BASELINE-CONTROL		0x1A
+		MKACTIVITY			0x1B
+
+		UNKNOWN                         0x1F
+
+Attributes:
+
+	attribute = ((byte) predefined_attribute_prefix_code (String) attribute_value) | ((byte) 0x1F (String) attribute_name (String) attribute_value)
+
+	predefined_attribute_prefix_code:
+
+	context		0x11		SC_ATTR_CONTEXT
+	servlet_path	0x12		SC_ATTR_SERVLET_PATH
+	remote_user	0x13		SC_ATTR_REMOTE_USER
+	auth_type	0x14		SC_ATTR_AUTH_TYPE
+	query_string	0x15		SC_ATTR_QUERY_STR
+	jvm_route	0x16		SC_ATTR_JVM_ROUTE
+	ssl_cert	0x17		SC_ATTR_SSL_CERT
+	ssl_cipher	0x18		SC_ATTR_SSL_CIPHER
+	ssl_session	0x19		SC_ATTR_SSL_SESSION
+	ssl_key_size	0x1A		SC_ATTR_SSL_KEY_SIZE
+
+	attribute_ext	0x1F		SC_ATTR_EXT
+
+Request Headers:
+	req_header = ((byte) predefined_req_header_prefix_code (String) req_header_value) | ((byte) 0x1F (String) req_header_name (String) req_header_value)
+
+	predefined req_header prefix_code:
+
+	accept 			0x21		SC_REQ_ACCEPT
+	accept-charset 		0x22		SC_REQ_ACCEPT_CHARSET
+	accept-encoding		0x23		SC_REQ_ACCEPT_ENCODING
+	accept-language		0x24		SC_REQ_ACCEPT_LANGUAGE
+	authorization		0x25		SC_REQ_AUTHORIZATION
+	connection		0x26		SC_REQ_CONNECTION
+	content-type		0x27		SC_REQ_CONTENT_TYPE
+	content-length		0x28		SC_REQ_CONTENT_LENGTH
+	cookie			0x29		SC_REQ_COOKIE
+	cookie2			0x2A		SC_REQ_COOKIE2
+	host			0x2B		SC_REQ_HOST
+	pragma			0x2C		SC_REQ_PRAGMA
+	referer			0x2D		SC_REQ_REFERER
+	user-agent		0x2E		SC_REQ_USER_AGENT
+
+	req_header_ext		0x2F		SC_REQ_EXT
+
+
+RESPONSE PACKET Structure:
+
+	Packet_Header:
+            | 1b_byte 0x41 | 1b_byte 0x42 | 2b_int packet_type | 1b_bool last_packet_in_group | 1b_bool reserved bit | 2b_int payload_length(n) | 2b_int reserved int |
+
+        A typical response will look like:
+            | 1b_byte 0x41 | 1b_byte 0x42 | 2b_int packet_type |1b_bool last_packet_in_group | 1b_bool reserved bit | 2b_int payload_length(n) | 2b_int reserved int | ...(n -1) + 10 |
+
+Common Response payload Format:
+
+	Payload Control Info
+		res_type			(int)
+
+	Actual Payload
+		optional_attributes		*(attribute)
+		njp13_break			(byte) 0xFF
+		
+	optional_attributes = *((byte) 0x1F (String) attribute_name (String) attribute_value)
+
+Send Response payload Format:
+
+	Payload Control Info
+		packet_type			(int) 40
+
+	Actual Payload
+
+		http_status_code		(int)
+		http_status_msg			(String)
+		res_headers			*(res_header)
+		njp13_break			(byte) 0xFF
+
+note: If all the info cannot be sent in the first packet, another packet is sent, the entire response is proccessed using the
+concatenation of all the actual payloads:
+whole_send_res = send_res_packet_actual_payload concat *(send_res_header_chunk_packet_actual_payload)
+
+Send Response Header Chunk payload format:
+	Payload Control Info
+		packet_type			(int) 42
+
+	Actual Payload
+		remaining headers
+		njp13_break			(byte) 0xFF
+
+Send Reponse Body Chunk payload format:
+	Payload Control Info
+		packet_type			(int) 46
+
+	Actual Payload
+		binary_data			(byte[])
+
+End Processing Cycle payload format:
+	Payload Control Info
+		prefix_code			(int) 50
+
+	Actual Payload
+		reuse connection		(boolean)
+
+Response Headers:
+	res_header = ((byte) predefined_res_header_prefix_code (String) res_header_value) | ((byte) 0x1F (String) res_header_name (String) res_header_value)
+
+	predefined res_header prefix_code:
+
+	content-type		0x21		SC_RES_CONTENT_TYPE
+	content-language	0x22		SC_RES_CONTENT_LANGUAGE
+	content-length		0x23		SC_RES_CONTENT_LENGTH
+	date			0x24		SC_RES_DATE
+	last-modified		0x25		SC_RES_LAST_MODIFIED
+	location		0x26		SC_RES_LOCATION
+	set-cookie		0x27		SC_RES_SET_COOKIE
+	set-cookie2		0x28		SC_RES_SET_COOKIE2
+	servlet-engine		0x29		SC_RES_SERVLET_ENGINE
+	status			0x2A		SC_RES_STATUS
+	www-authenticate	0x2B		SC_RES_WWW_AUTHENTICATE
+
+	res_header_ext		0x2F		SC_RES_EXT
