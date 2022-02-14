@@ -53,11 +53,13 @@
 
 // Find example: print out the object(s) in the collection
 
-    let personList = mondb.find(personCollection, "{name: 'shinigamidee'}");
+	let personList = personCollection.find("{name: 'shinigamidee'}").map(mondb.makeJSON);
 
 	personList.forEach(
 		person => resOut.println(person.name + ", " + person.city + "<br />");
 	);
+
+	personList.close();
 
 %>
 
