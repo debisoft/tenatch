@@ -1,21 +1,5 @@
 <%@page content_type="text/html; charset=ISO-8859-1"%>
-<%
-  let view_src_url = request.getWebletFullPath() + ";server_view_src=true"
-%>
-
-<%
-// Database connection
-	// Connect to the database
-		let mdb = mondb.connectDB('tester', "sample_training");
-
-	//Get the collection
-		let todoCollection = mdb.getCollection("todoList");
-
-//Insert sample data for demo
-//mondb.insertStr(todoCollection, '{"name": "cleaning", "due": "2022-02-11", "status": "do"}');
-
-%>
-
+<%  let view_src_url = request.getWebletFullPath() + ";server_view_src=true" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
   <HEAD>
@@ -73,18 +57,16 @@
         ul.topnav li.right,
         ul.topnav li {float: none;}
       }
-
-
     </style>
 
     <div class="page">
       <table class="left_page_border" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr style="background-color: #ffffff;">
           <td><b><a class="noline" href="">
-            <img src="images/canada.png" width="72" border="0" alt="">
-            <font size="10" color="#d60012">Maplecat </font>
-            <font size="10" color="#5c3e41">TODO List </font>
-            <font size="5" color="#d60012">Sample</font>
+            <img src="images/canada.png" width="72" border="0" alt="canadian flag">
+            <font size="7" color="#d60012">&emsp; Maplecat Tutorial </font>
+            <font size="5" color="#5c3e41">&emsp; TODO List </font>
+            <font size="3" color="#d60012">&emsp; Sample</font>
           </a></b></td>
         </tr>
       </table>
@@ -96,12 +78,9 @@
         <li class="right"><a href="#about">About</a></li>
       </ul>
 
-
-
       <font color="#5D7992">
         <nsp:PageTemplateBodyContent />
       </font>
-
 
       <ul class="topnav">
         <li><a class="active" href="#home">Home</a></li>

@@ -34,49 +34,50 @@
 
 <%!-- ********************************************************* --%>
 <%!-- Database connection --%>
-<%
-// Database connection
-	// Connect to the database
-		let mdb = mondb.connectDB('tester', "sample_training");
+  <%
+  // Database connection
+    // Connect to the database
+      let mdb = mondb.connectDB('tester', "sample_training");
 
-	//Get the collection
-		let todoCollection = mdb.getCollection("todoList");
-%>
-
+    //Get the collection
+      let todoCollection = mdb.getCollection("todoList");
+  %>
 
 
 <%!-- ********************************************************* --%>
 <%!-- Connect to database and update finished task to done --%>
-<div class="done-area">
-  <h4 class="title">The Task has been completed</h4>
-  <div class="list">
-  <%
-    var doneNo = Number(request.getReqParam("input2"));
-    doneNo--;
- 
-    let doList = mondb.find(todoCollection, "{status: 'do'}");
+  <div class="done-area">
+    <h4 class="title">The Task has been completed</h4>
+      <div class="list">
 
-    let itemCounter = 0;
-    doList.forEach(
-        item => {
-          if(itemCounter == doneNo){
-            resOut.println("&emsp;" + item.name + ", " + item.due + "<br />");
-            item.status="done";
-	          mondb.update(todoCollection, item);
-          }    
-          itemCounter++;
-        }
-    );   
-  %>
-  </div><br/><br/>
+      <%
+        var doneNo = Number(request.getReqParam("input2"));
+        doneNo--;
+  
+        let doList = todoCollection.find("{status: 'do'}").map(mondb.makeJSON);
 
-  <div class="input-area">
-    <form method="POST" action="todo.tsp">
-      <div>
-        <input type="submit" value="Return to the list"><br/>
-      </div>
-    </form>
+        let itemCounter = 0;
+        doList.forEach(
+            item => {
+              if(itemCounter == doneNo){
+                resOut.println(item.due + "&emsp;" + item.name + "<br />");
+                item.status="done";
+                mondb.update(todoCollection, item);
+              }    
+              itemCounter++;
+            }
+        );   
+      %>
+      
+      </div><br/><br/>
+
+    <div class="input-area">
+      <form method="GET" action="todo.tsp">
+        <div>
+          <input type="submit" value="Return to the list"><br/>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
 </nsp:PageTemplate>

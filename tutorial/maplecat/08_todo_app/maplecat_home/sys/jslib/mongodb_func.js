@@ -18,6 +18,12 @@ let mondb = {
 			r => JSON.parse(r)
 		);
 	},
+	findWithId: function(collection, object_id_str)
+	{
+		return collection.findOne(mgodb.makeObjectId(object_id_str)).map(
+			r => JSON.parse(r)
+		);
+	},
 	insert: function(collection, json_obj)
 	{
 		return collection.insert(mgodb.parseJSON(json_obj));
@@ -25,6 +31,26 @@ let mondb = {
 	insertStr: function(collection, json_str)
 	{
 		return collection.insert(JSON.parse(json_str));
+	},
+	makeJSON: function(r)
+	{
+		return JSON.parse(r);
+	},
+	/*
+	makeJSON: function(finder)
+	{
+		return finder.map(
+			r => JSON.parse(r)
+		);
+	},
+	*/
+	remove: function(collection, json_str)
+	{
+		return collection.remove(json_str);
+	},
+	removeWithId: function(collection, object_id_str)
+	{
+		return collection.remove(mgodb.makeObjectId(object_id_str));
 	},
 	upsert: function (collection, json_obj)
 	{

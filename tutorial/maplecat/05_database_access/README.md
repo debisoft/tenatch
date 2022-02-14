@@ -37,7 +37,7 @@
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
 <%
-/*********************************************************/
+
 // Database connection
 	// connect to the database
 	let mdb = mondb.connectDB('tester', "sample_training");
@@ -45,12 +45,12 @@
 	// get the collection
 	let personCollection = mdb.getCollection("persons");
 
-/*********************************************************/
+
 // Insert example: make a collection and insert pbject(s)
 
 	mondb.insertStr(personCollection, '{"name": "shinigamidee", "id": 1, "city": "Kobe"}');
 
-/*********************************************************/
+
 // Find example: print out the object(s) in the collection
 
     let personList = mondb.find(personCollection, "{name: 'shinigamidee'}");

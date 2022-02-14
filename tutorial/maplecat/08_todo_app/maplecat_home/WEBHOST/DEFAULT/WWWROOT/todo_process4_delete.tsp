@@ -32,40 +32,36 @@
 </style>
 
 
-
-
 <%!-- ********************************************************* --%>
-<%!-- Connect to database and add new task to todo_tbl --%>
-<div class="todo-area">
-  <h4 class="title">The Task has been added</h4>
-  <div class="list">
+<%!-- Database connection --%>
   <%
-    // Database connection
+  // Database connection
     // Connect to the database
       let mdb = mondb.connectDB('tester', "sample_training");
 
     //Get the collection
       let todoCollection = mdb.getCollection("todoList");
-      
-      let newTask = request.getReqParam('input1');
-      let newTaskDue = request.getReqParam('input1Date');
-
-    if(newTask != null){
-      mondb.insertStr(todoCollection, '{"name": "' + newTask +'", "due": "' + newTaskDue +'" ,"status": "do"}');
-      resOut.println(newTask + ", " + newTaskDue);
-    }else{
-      resOut.println("Please enter your task");
-    }
   %>
-  </div><br/><br/>
-  
-  <div class="input-area">
-    <form method="GET" action="todo.tsp">
-      <div>
-        <input type="submit" value="Return to the list"><br/>
-      </div>
-    </form>
+
+<%!-- ********************************************************* --%>
+<%!-- Connect to database and update finished task to done --%>
+  <div class="done-area">
+    <h4 class="title">The completed Tasks has been deleted</h4>
+      <div class="list">
+
+      <%
+        mondb.remove(todoCollection, '{"status": "done"}');
+      %>
+      
+      </div><br/><br/>
+
+    <div class="input-area">
+      <form method="GET" action="todo.tsp">
+        <div>
+          <input type="submit" value="Return to the list"><br/>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
 </nsp:PageTemplate>
