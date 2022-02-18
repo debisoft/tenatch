@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- Created by root on May 30, 2005, 6:12 PM -->
+
+<Host>
+     <Filter idt_name="host_hello_filter" class_name="jp.nihonsoft.misc.HelloFilter">
+        <InitStrAttr idt_name="config_from" value="host.xml - host" />
+     </Filter>
+     <FilterMap idt_name="host_hello_map" map_pattern="/SayHello" filter_name="host_hello_filter" />
+    
+    <Weppli idt_web_context_path="/" base_path="WWWROOT" fg_allow_linking="false">
+        <!--<Filter idt_name="host_hello_filter" class_name="jp.nihonsoft.misc.HelloFilter">
+            <InitStrAttr idt_name="config_from" value="host.xml - weppli" />
+        </Filter>
+        <FilterMap idt_name="host_weppli_hello_map" map_pattern="/SayHello" filter_name="host_hello_filter" />-->
+        <Weblet idt_name="host_hello_weblet" class_name="jp.nihonsoft.misc.HelloWeblet">
+            <InitStrAttr idt_name="config_from" value="host.xml - weppli" />
+        </Weblet>
+        <WebletMap idt_name="host_weppli_hello_map" map_pattern="/weblet/SayHello" weblet_name="host_hello_weblet" />
+    </Weppli>
+</Host>
