@@ -1,4 +1,5 @@
 ## Page Template
+
 <br>
 
 1. `template_1.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成して、以下のコードを貼り付けます。
@@ -11,8 +12,8 @@
         <title>Weather Station</title>
     </head>
     <body>
-        <% 
-            var date_today = new Date(); 
+        <%
+            var date_today = new Date();
         %>
         Weather For <%=date_today%><br />
         <table bgcolor="ffcc99">
@@ -23,9 +24,11 @@
     </body>
 </html>
 ```
+
 <br>
 
 2. 次に`hotday.nsp`というファイルを`/WEBHOST/DEFAULT/WWWROOT`内に作成し、以下のコードを貼り付けます。
+
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
@@ -39,10 +42,8 @@
 
 </nsp:PageTemplate>
 ```
+
 <br>
 
 3. ブラウザでテストしましょう。
-`/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、[http://localhost:8080/hotday.nsp](http://localhost:9090/hotday.nsp) にアクセスします。
-
-
-
+   `/WEBHOST/DEFAULT/WWWROOT`にファイルを作成しているのを確認し、[http://localhost:8080/hotday.nsp](http://localhost:9090/hotday.nsp) にアクセスします。

@@ -13,7 +13,7 @@
     </head>
     <body>
         <%
-            var date_today = new Date();
+            let date_today = new Date();
         %>
         Weather For <%=date_today%><br />
         <table bgcolor="ffcc99">
@@ -35,7 +35,7 @@
 <nsp:PageTemplate template_url="template_1.nsp">
 
 <%
-    var msg = "It is a hot day today!!";
+    let msg = "It is a hot day today!!";
 %>
 
 <%=msg%>

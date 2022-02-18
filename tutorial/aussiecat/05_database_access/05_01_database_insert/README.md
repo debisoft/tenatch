@@ -2,7 +2,7 @@
 
 ## See Intro
 
-初期は[ここ](../README.md)を参考にPostgreSQLをインストールしましょう。
+初期は[ここ](../README.md)を参考に PostgreSQL をインストールしましょう。
 
 ## Database INSERT
 
@@ -36,11 +36,11 @@
 ```
 
 2. Test the page in your browser:
-If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
-you should be able to view the page at http://localhost:9090/db_insert_test.nsp
-<br>NOTE: Webpage names are case sensitive.
+   If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
+   you should be able to view the page at http://localhost:9090/db_insert_test.nsp
+   <br>NOTE: Webpage names are case sensitive.
 
 3. You should be able to see the number of rows affected, or an error message if there was a problem.
 4. More documentation on the use of the Database Object can be found at FESI Database Extension.
-NOTE: Another method of connecting to the database is under development and
-will eventually replace this method.
+   NOTE: Another method of connecting to the database is under development and
+   will eventually replace this method.

@@ -6,9 +6,9 @@
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
 <%
-    var sessionContext = request.getSessionContext();
+    let sessionContext = request.getSessionContext();
 
-    var curr_count = Number(sessionContext.getAttr("counter_1"));
+    let curr_count = Number(sessionContext.getAttr("counter_1"));
 
     if(curr_count != null)
     {

@@ -51,7 +51,7 @@
       <div class="list">
 
       <%
-        var doneNo = Number(request.getReqParam("input2"));
+        let doneNo = Number(request.getReqParam("input2"));
         doneNo--;
   
         let doList = todoCollection.find("{status: 'do'}").map(mondb.makeJSON);
