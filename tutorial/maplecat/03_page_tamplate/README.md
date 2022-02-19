@@ -32,7 +32,7 @@
 ```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
-<nsp:PageTemplate template_url="template_1.nsp">
+<nsp:PageTemplate template_url="template_1.tsp">
 
 <%
     let msg = "It is a hot day today!!";
