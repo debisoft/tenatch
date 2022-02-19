@@ -80,4 +80,4 @@
 9. `sample_training`をひらくと、ステップ 5 で作成した`persons`コレクションがあるのでクリックすると Insert したオブジェクトが確認できます。
    <br>
 
-10. [05_01_database_insert](05_01_database_insert/README.md)、 [05_02_database_find](05_02_database_find/README.md)、[05_03_database_update](05_03_database_update/README.md) [05_04_database_remove](05_04_database_remove/README.md)　を参考に、データベース内のデータをどう変更するか、練習してみましょう。
+10. [05_01_database_insert](05_01_database_insert/README.md)、 [05_02_database_find](05_02_database_find/README.md)、[05_03_database_update](05_03_database_update/README.md)、 [05_04_database_remove](05_04_database_remove/README.md)　を参考に、データベース内のデータをどう変更するか、練習してみましょう。
