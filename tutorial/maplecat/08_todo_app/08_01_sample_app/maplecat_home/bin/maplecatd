@@ -1,0 +1,323 @@
+#!/bin/sh
+#
+# chkconfig: 345 80 20
+# description: maplecatserver
+# processname: maplecatserver
+# Go through the steps and edit the appropriate variables
+# and place this file in /etc/init.d/
+# Make sure only root can read this file
+# Send any questions to fchoong@users.sourceforge.net
+# -----------------------------------------------------
+
+# User setup.
+
+# Step 1: Specify your app_home here
+# eg. app_home="/usr/maplecat/maplecat_home/"
+app_home="C:/Users/Chihiro/Desktop/Maplecat/maplecat_home"
+
+# Step 2: change this to point to your JDK directory.
+# eg. jdk_home="/usr/java/j2sdk1.4.0/"
+jdk_home="C:/Java/jdk1.8.0_291/"
+#jdk_home="/usr/local/lib/sablevm/"
+
+# Step 3(Optional): Set the MAX startup time and shutdown time.
+STARTUP_MAXSEC_DEFAULT=600
+SHUTDOWN_MAXSEC_DEFAULT=600
+
+# -----------------------------------------------------
+
+app_name="maplecat"
+
+# append on command line, with -J prefix on each
+jreflags=""
+
+# location of the log files
+STDOUTLOGFILE="$app_home/logs/serverstdout.log"
+STDERRLOGFILE="$app_home/logs/serverstderr.log"
+
+jargs=${jreflags}
+jargs="$jargs -Dapp.home=$app_home"
+jargs="$jargs -Djdk.home=$jdk_home"
+
+# location of the pid file
+PIDFILE="$app_home/work/server.pid"
+
+# the class to run to startup
+app_startup_class="com.tenatch.maplecat.startup.StandAloneServer"
+
+# the class to run to shudown
+#app_shutdown_class="com.tenatch.maplecat.startup.StandAloneServerShutdown"
+app_shutdown_port="9009"
+
+# absolutize app_home
+
+app_home=`cd ${app_home}; pwd`
+
+#
+# bring in needed functions
+
+# CHANGED: 20070222 - fchoong - changed from lib/functions to sys/lib/functions
+. ${app_home}/sys/lib/functions
+
+# Source function library.
+#if [ -x /etc/rc.d/init.d/functions ]; then
+#. /etc/rc.d/init.d/functions
+#fi
+
+# Get main_args params
+
+main_args=""
+arg_count=0
+
+for x in "$@"
+do
+	#if ! [ $arg_count -eq 0 ]; then
+	#	if [ $arg_count -eq 1 ]; then
+	#		main_args="$x"
+	#	else
+	#		main_args="$main_args $x"
+	#	fi
+	#fi
+	
+	if [ $arg_count -eq 0 ]; then
+		main_args="$x"
+	else
+		main_args="$main_args $x"
+	fi
+
+	arg_count=$((arg_count+1))
+done
+
+failout() {
+	#echo "Script Failure: $1" >> $STDERRLOGFILE
+	#echo_failure
+	exit 1
+}
+
+start()
+{
+	echo -n "Starting $app_name: "
+	[ -n "$DPID" ] && {
+    	echo -e "Daemon already running (with pid $DPID)" 1>&2
+	failout startup
+        }
+        [ -f $STDOUTLOGFILE ] && age "$STDOUTLOGFILE"
+	[ -f $STDERRLOGFILE ] && age "$STDERRLOGFILE"
+	pre_main
+
+	#
+	# let's go
+	#
+    	cd $app_home/work
+
+	nohup sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $main_args <&- > $STDOUTLOGFILE 2> $STDERRLOGFILE" > /dev/null &
+
+	while [ ! -e $STDERRLOGFILE ]; do
+		sleep 1
+	done
+
+	#echo "reading logfile: " $STDERRLOGFILE "\n"
+
+	ctr=0
+	while [ $ctr -lt $STARTUP_MAXSEC ]; do
+		ctr=$((ctr+1))
+		#grep "^$app_name server .* is running$" $STDOUTLOGFILE \
+		grep "^STARTUP_OK" $STDERRLOGFILE \
+		> /dev/null && echo "OK" && echo && echo "startup took $ctr sec" >> $STDERRLOGFILE && return 0
+		grep "^STARTUP_FAILED" $STDERRLOGFILE \
+		> /dev/null && echo "FAILED" && echo && echo "startup failed after $ctr sec" >> $STDERRLOGFILE && return 1
+		echo -n
+		sleep 1
+	done
+	echo "FAILED"
+	echo "STARTUP_MAXSEC of $STARTUP_MAXSEC elapsed" >> $STDERRLOGFILE
+	failout startup
+	return 1
+} # start()
+
+# Non-Daemon mode.
+run()
+{
+	echo -n "Starting $app_name: "
+	[ -n "$DPID" ] && {
+    	echo -e "\nDaemon already running (with pid $DPID)" 1>&2
+	failout startup
+        }
+        #[ -f $STDOUTLOGFILE ] && age "$STDOUTLOGFILE"
+	#[ -f $STDERRLOGFILE ] && age "$STDERRLOGFILE"
+	pre_main
+
+	#
+	# let's go
+	#
+    	cd $app_home/work
+
+	#sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $@ <&- > $STDOUTLOGFILE 2> $STDERRLOGFILE"
+
+	#echo sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $@ <&-"
+	#sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $@ <&-"
+
+	#sh -c 'echo $$'" > $PIDFILE;
+	#exec
+
+	#echo exec "$jdk_home/bin/java" $thread_flag -classpath "$cp" $jargs $app_startup_class $main_args <&- > /dev/tty 2> /dev/tty
+	sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $main_args <&- > /dev/tty 2> /dev/tty"
+	#sh -c 'echo $$'" > $PIDFILE; exec \"$jdk_home/bin/java\" $thread_flag -classpath \"$cp\" $jargs $app_startup_class $main_args <&- > $STDOUTLOGFILE 2> $STDERRLOGFILE"
+
+	#ctr=0
+	#while [ $ctr -lt $STARTUP_MAXSEC ]; do
+	#	ctr=$((ctr+1))
+	#	grep "^$app_name server .* is running$" $STDOUTLOGFILE \
+	#	> /dev/null && echo_success && echo && echo "startup took $ctr sec" >> $STDOUTLOGFILE && return 0
+	#	echo -n
+	#	sleep 1
+	#done
+	#echo "STARTUP_MAXSEC of $STARTUP_MAXSEC elapsed" >> $STDOUTLOGFILE
+	#failout startup
+	#return 1
+	return 0
+} # run()
+
+stop()
+{
+	echo -n "Stopping $app_name: "
+	[ -n "$DPID" ] || {
+	echo -e '\nUnable to determine pid of process' 1>&2
+	failout stopping
+        }
+	pre_main
+
+	#
+	# let's go
+	#
+    	cd $app_home/work
+
+		exec "$jdk_home/bin/java" $thread_flag -classpath "$cp" $jargs com.tenatch.maplecat.startup.local.LocalAdminClient stop $app_shutdown_port
+
+	ctr=0
+	while [ $ctr -lt $SHUTDOWN_MAXSEC ]; do
+		ctr=$((ctr+1))
+		grep "SERVER_STOPPED" $STDOUTLOGFILE \
+		> /dev/null && echo "OK" && echo && echo "shutdown took $ctr sec" >> $STDOUTLOGFILE && rm -f $PIDFILE && return 0
+		echo -n
+		sleep 1
+	done
+	echo "SHUTDOWN_MAXSEC of $SHUTDOWN_MAXSEC elapsed." >> $STDOUTLOGFILE
+	#echo_warning
+	echo "FAILED"
+	echo "SHUTDOWN_MAXSEC of $SHUTDOWN_MAXSEC elapsed, maybe you should try to kill the process instead."
+	return 1
+} # stop()
+
+restart()
+{
+    echo "restarting..."
+    $0 stop
+    sleep 1
+    $0 start
+    if [ "$?" -eq "0" ]; then
+        return 0
+    else
+        return 1
+    fi
+} # restart()
+
+killprocess()
+{
+    echo -n "Killing $app_name: "
+    [ -n "$DPID" ] || {
+	echo -n -e '\nUnable to determine pid of process' 1>&2
+	failout killing
+    }
+    kill -HUP $DPID 2>&- || {
+	echo -n -e '\nKill -HUP failed' 1>&2
+	failout killing
+    }
+    for cnt in 1 2 3 4 5; do
+    	kill -0 $DPID 2>&- || break
+	sleep 1
+    done
+    kill -0 $DPID 2>&- && {
+    	echo '   Daemon is really being stubborn.  Sending KILL signal...'
+	kill -KILL $DPID 2>&- || {
+	    echo -n -e '\nKill -KILL failed' 1>&2
+	    failout shutdown
+    	}
+    }
+    for cnt in 1 2 3 4 5; do
+    	kill -0 $DPID 2>&- || break
+	sleep 1
+    done
+    kill -0 $DPID 2>&- && {
+	echo -n -e "Daemon is really stuck bad.  You're on your own..." 1>&2
+	failout shutdown
+    }
+    #echo_sucess
+    rm -f $PIDFILE
+    echo "OK"
+    exit 0
+} # killprocess()
+
+checkstatus()
+{
+    if [ -n "$DPID" ]; then
+	exec ps -lp $DPID
+    else
+    	echo 'Not running'
+	exit 1
+    fi
+} # checkstatus()
+
+
+[ -n "$STARTUP_MAXSEC" ] || STARTUP_MAXSEC=$STARTUP_MAXSEC_DEFAULT
+[ -n "$SHUTDOWN_MAXSEC" ] || SHUTDOWN_MAXSEC=$SHUTDOWN_MAXSEC_DEFAULT
+
+
+if [ -r $PIDFILE ]; then DPID="`< $PIDFILE`"
+else DPID=; fi
+
+case "$DPID" in ''|[0-9]*);; *)
+    echo "Bad Pid File" >> $STDOUTLOGFILE
+    echo -e "\nBad Pid File" 1>&2
+    failout "DPID"
+esac
+case "$DPID" in ''|*[0-9]);; *)
+    echo "Bad Pid File" >> $STDOUTLOGFILE
+    echo -e "\nBad Pid File" 1>&2
+    failout "DPID"
+esac
+
+[ -n "$DPID" ] && {
+    kill -0 $DPID >&- > /dev/null 2> /dev/null || {
+    	#echo -e "\nPid $DPID is not running.  Removing pid file." 1>&2
+	DPID=
+	rm -f $PIDFILE
+    }
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  run)
+        run
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  kill)
+        killprocess
+        ;;
+  status)
+       checkstatus
+       ;;
+  *)
+        echo "Usage: $app_name {start|run|stop|restart|kill|status}"
+        exit 1
+esac
+
+exit $RETVAL
