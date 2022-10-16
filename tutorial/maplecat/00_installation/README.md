@@ -19,6 +19,9 @@ Java 　 8（jdk1.8.0_291） をインストールしてください。<br>
 java -version
 set path　
 ```
+MacOS の方：<br>
+こちらのリンクからJava8をインストールしてください。
+https://mkyong.com/java/how-to-install-java-on-mac-osx/#homebrew-install-java-8-on-macos
 
 ## macOS
 
